@@ -8,15 +8,17 @@ GenSinDaily.js for scriptable
 ## 使用方法
 > 环境： iPhone / iPad
 
-1. 下载 [`**[Scriptable](https://apps.apple.com/cn/app/scriptable/id1405459188)**`]
+1. 下载 [**`Scriptable`**](https://apps.apple.com/cn/app/scriptable/id1405459188)
 
-2. 长按桌面，添加Scriptable 小组件(建议选择中尺寸)
+2. 打开App，点击右上角`+`号，复制`GenShinDaily.js`中的代码
 
-3. 长按Scriptable小组件
+3. 长按桌面，添加Scriptable 小组件(建议选择中尺寸)
 
-4. Script选择本``GenShinDaily.js``
+4. 长按Scriptable小组件
 
-5. Paramter填写Cookie
+5. Script选择刚刚保存的脚本
+
+6. Paramter填写[米游社Cookie](https://docs.qq.com/doc/DUWNVQVFTU3liTVlO)
 
 ## 致谢
 > [Le-niao/Yunzai-Bot](https://github.com/Le-niao/Yunzai-Bot)
