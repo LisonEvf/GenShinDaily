@@ -356,6 +356,7 @@ async function createWidget() {
     for (let text of "在桌面添加小组件，选择Scriptable，建议选择中尺寸，长按小组件，选择“编辑小组件”，Script选择本脚本，Parameter粘贴米游社Cookie".split("，")) {
       let tipText = widget.addText(text)
       tipText.font = Font.mediumSystemFont(12)
+      tipText.textColor = Color.black()
     }
     return widget
   }
@@ -363,6 +364,7 @@ async function createWidget() {
   try {
     let signText = widget.addText(await dailySign(await getUid()))
     signText.font = Font.mediumSystemFont(8)
+    signText.textColor = Color.black()
     signText.rightAlignText()
     widget.url = "yuanshengame://"
     for (let item of await data()) {
