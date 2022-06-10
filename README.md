@@ -5,6 +5,13 @@ GenSinDaily.js for scriptable
 
 项目仅供学习交流使用，严禁用于任何商业用途和非法行为
 
+|  |  |
+| ------------- | ------------- |
+| ![IMG_5446](https://user-images.githubusercontent.com/16568963/173067023-849fd113-1da9-46a3-85b3-304771d4b5d9.PNG) | ![IMG_5447](https://user-images.githubusercontent.com/16568963/173067032-ffcaa3da-5ff7-4229-8479-0abce2e4af36.PNG) |
+
+
+
+
 ## 使用方法
 > 环境： iPhone / iPad
 
