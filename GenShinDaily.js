@@ -302,7 +302,7 @@ async function data() {
     desc: [{
       text: "原粹树脂  "
     }, {
-      text: `${calTime(dailyData.resin_recovery_time)} 全部恢复`,
+      text: dailyData.current_resin < dailyData.max_resin ? `${calTime(dailyData.resin_recovery_time)} 全部恢复` : "已满",
       color: dailyData.resin_recovery_time > 960 ? "#000000" : "#ff0000"
     }]
   }, {
