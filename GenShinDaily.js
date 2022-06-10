@@ -1,6 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: yellow; icon-glyph: mobile;
+// icon-color: yellow; icon-glyph: mobile; share-sheet-inputs: url;
 // Author: LisonEvf
 
 // const filename = `${Script.name()}.jpg`
@@ -115,7 +115,7 @@ function getDS_sign() {
   const n = "h8w582wxwgqvahcdkpvdhbh2w9casgfl";
   const t = Math.round(new Date().getTime() / 1000);
   //   const r = lodash.sampleSize("abcdefghijklmnopqrstuvwxyz0123456789", 6).join("");
-  const r = Math.random().toString(36).substr(2, 6).join("");
+  const r = Math.random().toString(36).substring(2, 8);
   const DS = md5(`salt=${n}&t=${t}&r=${r}`);
   return `${t},${r},${DS}`;
 }
@@ -243,7 +243,7 @@ async function dailySign(uid) {
   var res = await req.loadJSON()
 
   if(res.retcode == 0 || res.retcode == -5003)
-    reutrn `今日米游社已签到第${signInfo.data.total_sign_day++}天奖励：${reward.name}*${reward.cnt}`
+    return `今日米游社已签到第${signInfo.data.total_sign_day++}天奖励：${reward.name}*${reward.cnt}`
   else
     throw `米游社info接口错误[${uid}]:${JSON.stringify(res)}`
 }
@@ -351,7 +351,8 @@ async function createWidget() {
   widget.backgroundColor = new Color("#f0eae3")
   widget.backgroundImage = imgBg
 
-  if (!config.runsInWidget){
+  if (config.runsInApp){
+    // Safari.openInApp('https://bbs.mihoyo.com/ys/')
     widget.url = "https://docs.qq.com/doc/DUWNVQVFTU3liTVlO"
     for (let text of "在桌面添加小组件，选择Scriptable，建议选择中尺寸，长按小组件，选择“编辑小组件”，Script选择本脚本，Parameter粘贴米游社Cookie".split("，")) {
       let tipText = widget.addText(text)
@@ -364,8 +365,8 @@ async function createWidget() {
   try {
     let signText = widget.addText(await dailySign(await getUid()))
     signText.font = Font.mediumSystemFont(8)
-    signText.textColor = Color.black()
     signText.rightAlignText()
+    signText.textColor = Color.black()
     widget.url = "yuanshengame://"
     for (let item of await data()) {
       createItem(widget, item)
