@@ -338,7 +338,10 @@ async function data() {
     desc: "值得铭记的强敌"
   }, {
     icon: imgCL,
-    num: dailyData.transformer.recovery_time.Day > 0 ? `${dailyData.transformer.recovery_time.Day}天后` : calTime(dailyData.transformer.recovery_time.Hour * 3600 + dailyData.transformer.recovery_time.Minute * 60 + dailyData.transformer.recovery_time.Second),
+    num: [{
+      text: dailyData.transformer.obtained ? "已冷却" : (dailyData.transformer.recovery_time.Day > 0 ? `${dailyData.transformer.recovery_time.Day}天后冷却` : `${calTime(dailyData.transformer.recovery_time.Hour * 3600 + dailyData.transformer.recovery_time.Minute * 60 + dailyData.transformer.recovery_time.Second)}冷却`),
+      color: dailyData.transformer.obtained ? "#ff0000" : "#000000"
+    }],
     desc: "参量质变仪"
   }
   ]
@@ -402,9 +405,17 @@ async function createItem(widget, item) {
 
   stack.addSpacer()
 
-  let numStack = stack.addText(item.num)
-  numStack.font = Font.mediumSystemFont(12)
-  numStack.textColor = Color.black()
+  if (typeof item.num === "string") {
+    let numStack = stack.addText(item.num)
+    numStack.font = Font.mediumSystemFont(12)
+    numStack.textColor = Color.black()
+  } else {
+    for (let num of item.num) {
+      let numStack = stack.addText(num.text)
+      numStack.font = Font.mediumSystemFont(12)
+      numStack.textColor = new Color(num.color || "#000000")
+    }
+  }
 
   return stack
 }
