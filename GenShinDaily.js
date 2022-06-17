@@ -318,8 +318,8 @@ async function data() {
     icon: imgPQ,
     num: `${dailyData.current_expedition_num}/${dailyData.max_expedition_num}`,
     desc: [{
-      text: "派遣探索  "
-    }, {
+      text: !dailyData.expeditions || dailyData.expeditions.length <= 0 ? "尚未进行派遣探索" : "派遣探索  "
+    }, !dailyData.expeditions || dailyData.expeditions.length <= 0 ? "" : {
       text: dailyData.expeditions[0].remained_time > 0 ? `${calTime(dailyData.expeditions[0].remained_time)} 完成` : "已完成",
       color: dailyData.expeditions[0].remained_time > 0 ? "#000000" : "#ff0000"
     }]
@@ -330,7 +330,7 @@ async function data() {
       text: "洞天宝钱  "
     }, {
       text: dailyData.home_coin_recovery_time > 0 ? `${calTime(dailyData.home_coin_recovery_time)}溢出` : "已溢出",
-      color: dailyData.home_coin_recovery_time > 0 ? "#000000" : "#ff0000"
+      color: dailyData.current_home_coin/dailyData.max_home_coin < 0.9 ? "#000000" : "#ff0000"
     }]
   }, {
     icon: imgZB,
@@ -338,10 +338,10 @@ async function data() {
     desc: "值得铭记的强敌"
   }, {
     icon: imgCL,
-    num: [{
-      text: dailyData.transformer.obtained ? "已冷却" : (dailyData.transformer.recovery_time.Day > 0 ? `${dailyData.transformer.recovery_time.Day}天后冷却` : `${calTime(dailyData.transformer.recovery_time.Hour * 3600 + dailyData.transformer.recovery_time.Minute * 60 + dailyData.transformer.recovery_time.Second)}冷却`),
-      color: dailyData.transformer.obtained ? "#ff0000" : "#000000"
-    }],
+    num: dailyData.transformer.obtained ? [{
+      text: dailyData.transformer.recovery_time.reached ? "已冷却" : (dailyData.transformer.recovery_time.Day > 0 ? `${dailyData.transformer.recovery_time.Day}天后冷却` : `${calTime(dailyData.transformer.recovery_time.Hour * 3600 + dailyData.transformer.recovery_time.Minute * 60 + dailyData.transformer.recovery_time.Second)}冷却`),
+      color: dailyData.transformer.recovery_time.reached ? "#ff0000" : "#000000"
+    }] : "尚未获得",
     desc: "参量质变仪"
   }
   ]
@@ -377,6 +377,7 @@ async function createWidget() {
   } catch (error) {
     let errText = widget.addText(typeof error == "string" ? error : error.message)
     errText.textColor = Color.red()
+    errText.font = Font.mediumSystemFont(6)
     errText.centerAlignText()
   }
 
